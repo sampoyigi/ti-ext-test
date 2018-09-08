@@ -1,0 +1,11 @@
+{
+  "code": "sampoyigi.test",
+  "name": "Test Extension",
+  "description": "Provides block component for demonstration",
+  "version": "1.0.0",
+  "author": "SamPoyigi",
+  "icon": "fa-puzzle",
+  "tags": {
+    "1.0.0": "Initial tag of demo extension"
+  }
+}
