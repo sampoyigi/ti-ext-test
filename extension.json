@@ -5,6 +5,10 @@
   "version": "1.0.0",
   "author": "SamPoyigi",
   "icon": "fa-puzzle",
+  "require": {
+    "igniter.test": "*",
+    "igniter.local": "*"
+  },
   "tags": {
     "1.0.0": "Initial tag of demo extension"
   }
