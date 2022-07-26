@@ -1,6 +1,7 @@
 {
   "name": "sampoyigi/test",
   "type": "tastyigniter-extension",
+  "description":"Provides block component for demonstration",
   "require": {
     "php": ">=7.1",
     "laravel/framework": "^6.0",
