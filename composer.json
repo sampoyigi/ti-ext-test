@@ -1,12 +1,23 @@
 {
   "name": "sampoyigi/test",
-  "type": "igniter-extension",
+  "type": "tastyigniter-extension",
   "require": {
     "php": ">=7.1",
     "laravel/framework": "^6.0",
     "tastyigniter/flame": "^1.0",
     "phpunit/phpunit": "~8.0",
     "kalnoy/nestedset": "~5.0"
+  },
+  "extra": {
+    "tastyigniter-extension": {
+      "code": "sampoyigi.test",
+      "name": "Test Extension",
+      "icon": {
+        "class": "fa fa-puzzle",
+        "color": "#fff",
+        "backgroundColor": "#02586F"
+      }
+    }
   },
   "minimum-stability": "dev"
 }
