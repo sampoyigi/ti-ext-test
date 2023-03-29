@@ -20,8 +20,8 @@ jobs:
           version=""
           is_matching=false
           if [[ "${{ steps.extract_commit_message.outputs.message }}" =~ ^\[(v?[0-9]+\.[0-9]+\.[0-9]+)\]:.*$ ]]; then
-          is_matching=true
-          version="${BASH_REMATCH[1]}"
+            is_matching=true
+            version="${BASH_REMATCH[1]}"
           fi
           echo "IS_MATCHING=$is_matching" >> $GITHUB_ENV
           echo "VERSION=$version" >> $GITHUB_ENV
@@ -31,3 +31,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CUSTOM_TAG: ${{ env.VERSION }}
+          DRY_RUN: true
