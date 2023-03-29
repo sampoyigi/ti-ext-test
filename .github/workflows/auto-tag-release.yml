@@ -26,11 +26,8 @@ jobs:
           echo "IS_MATCHING=$is_matching" >> $GITHUB_ENV
           echo "VERSION=$version" >> $GITHUB_ENV
       - name: Create tag
-        uses: anothrNick/github-tag-action@1.30.0
+        uses: anothrNick/github-tag-action@1.61.0
         if: ${{ env.IS_MATCHING }} == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_branch: ${GITHUB_REF#refs/heads/}
-          tag_name: ${{ env.VERSION }}
-          tag_message: ${{ env.COMMIT_MESSAGE }}
+          CUSTOM_TAG: ${{ env.VERSION }}
