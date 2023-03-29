@@ -26,6 +26,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_branch: ${{ github.ref#refs/heads/ }}
+          release_branch: ${GITHUB_REF#refs/heads/}
           tag_name: ${{ steps.check_commit_message.outputs.version }}
           tag_message: ${{ steps.extract_commit_message.outputs.message }}
