@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Extract commit message
         run: |
           commit_message=$(git log --format=%B -n 1 ${{ github.sha }})
@@ -18,6 +18,7 @@ jobs:
         run: |
           # extract version number from commit message
           version=""
+          body=$(echo "${{ steps.extract_commit_message.outputs.body }}" | sed 's/.*\]:\s*//')
           is_matching=false
           if [[ "${{ env.COMMIT_MESSAGE }}" =~ ^\[(v?[0-9]+\.[0-9]+\.[0-9]+)\]:.*$ ]]; then
             is_matching=true
@@ -25,10 +26,11 @@ jobs:
           fi
           echo "IS_MATCHING=$is_matching" >> $GITHUB_ENV
           echo "VERSION=$version" >> $GITHUB_ENV
+          echo "RELEASE_BODY=$body" >> $GITHUB_ENV
       - name: Create release
         uses: softprops/action-gh-release@v1
         if: env.IS_MATCHING == 'true'
         with:
           tag_name: ${{ env.VERSION }}
-          body: ${{ env.COMMIT_MESSAGE }}
+          body: ${{ env.RELEASE_BODY }}
           token: ${{ secrets.GITHUB_TOKEN }}
