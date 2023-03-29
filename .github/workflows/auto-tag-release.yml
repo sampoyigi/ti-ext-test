@@ -19,7 +19,7 @@ jobs:
           # extract version number from commit message
           version=""
           is_matching=false
-          if [[ "${{ steps.extract_commit_message.outputs.message }}" =~ ^\[(v?[0-9]+\.[0-9]+\.[0-9]+)\]:.*$ ]]; then
+          if [[ "${{ env.COMMIT_MESSAGE }}" =~ ^\[(v?[0-9]+\.[0-9]+\.[0-9]+)\]:.*$ ]]; then
             is_matching=true
             version="${BASH_REMATCH[1]}"
           fi
