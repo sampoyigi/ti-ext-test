@@ -11,21 +11,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Extract commit message
-        run: echo ::set-output name=message::$(git log --format=%B -n 1 ${{ github.sha }})
+        run: |
+          commit_message=$(git log --format=%B -n 1 ${{ github.sha }})
+          echo "COMMIT_MESSAGE=$commit_message" >> $GITHUB_ENV
       - name: Check commit message pattern
         run: |
-          if [[ "${{ steps.extract_commit_message.outputs.message }}" =~ ^(\[(v?[0-9]+\.[0-9]+\.[0-9]+)\]:\s|\[([0-9]+\.[0-9]+\.[0-9]+)\]:\s) ]]; then
-            echo "::set-output name=version::${BASH_REMATCH[1]}"
-            echo "::set-output name=is_matching::true"
-          else
-            echo "::set-output name=is_matching::false"
+          # extract version number from commit message
+          version=""
+          is_matching=false
+          if [[ "${{ steps.extract_commit_message.outputs.message }}" =~ ^\[(v?[0-9]+\.[0-9]+\.[0-9]+)\]:.*$ ]]; then
+          is_matching=true
+          version="${BASH_REMATCH[1]}"
           fi
+          echo "IS_MATCHING=$is_matching" >> $GITHUB_ENV
+          echo "VERSION=$version" >> $GITHUB_ENV
       - name: Create tag
         uses: anothrNick/github-tag-action@1.30.0
-        if: steps.check_commit_message.outputs.is_matching == 'true'
+        if: ${{ env.IS_MATCHING }} == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_branch: ${GITHUB_REF#refs/heads/}
-          tag_name: ${{ steps.check_commit_message.outputs.version }}
-          tag_message: ${{ steps.extract_commit_message.outputs.message }}
+          tag_name: ${{ env.VERSION }}
+          tag_message: ${{ env.COMMIT_MESSAGE }}
