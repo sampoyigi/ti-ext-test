@@ -26,11 +26,9 @@ jobs:
           echo "IS_MATCHING=$is_matching" >> $GITHUB_ENV
           echo "VERSION=$version" >> $GITHUB_ENV
       - name: Create release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
         if: ${{ env.IS_MATCHING }} == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.VERSION }}
-          release_name: ${{ env.VERSION }}
           body: ${{ env.COMMIT_MESSAGE }}
+          token: ${{ secrets.GITHUB_TOKEN }}
