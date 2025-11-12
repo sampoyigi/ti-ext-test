@@ -8,7 +8,5 @@ use Igniter\System\Classes\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    public function boot()
-    {
-    }
+    public function boot() {}
 }
