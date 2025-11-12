@@ -1,1 +1,0 @@
-{"code":"sampoyigi.test","name":"Test Extension","description":"Provides block component for demonstration","version":"v0.1.3","author":"SamPoyigi","icon":"fa-puzzle","require":{"igniter.test":"*","igniter.local":"*"},"tags":{"1.0.0":"Initial tag of demo extension"}}
