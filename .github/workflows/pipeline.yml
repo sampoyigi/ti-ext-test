@@ -15,5 +15,3 @@ jobs:
     uses: tastyigniter/workflows/.github/workflows/auto-merge-release.yml@main
     with:
       release-branch: master
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
