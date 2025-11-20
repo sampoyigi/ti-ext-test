@@ -1,0 +1,18 @@
+name: Auto Merge Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-branch:
+        description: 'Target branch for release'
+        required: false
+        default: 'master'
+        type: string
+
+jobs:
+  release:
+    uses: tastyigniter/workflows/.github/workflows/auto-merge-release.yml@main
+    with:
+      release-branch: ${{ inputs.release-branch || 'master' }}
+    secrets:
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
