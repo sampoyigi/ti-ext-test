@@ -10,5 +10,5 @@ use Override;
 class Extension extends BaseExtension
 {
     #[Override]
-    public function boot() {}
+    public function boot(): void {}
 }
